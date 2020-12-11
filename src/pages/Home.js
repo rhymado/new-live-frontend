@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Product from "../components/Product";
 import FunctionComponent from "../components/FunctionComponent";
+import Counter from "../components/Counter";
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     title: "Popular",
   };
+
   render() {
-    const { match, location, history } = this.props;
-    console.log("Home", match, location, history);
+    const { history, counter } = this.props;
+    // console.log("Home", match, location, history);
     return (
       <>
         <Product title={this.state.title} />
-        <FunctionComponent title="Selamat Datang" />
+        <FunctionComponent title={counter.counterNumber} />
         <Button
           onClick={() => {
             if (this.state.title === "Popular") {
@@ -50,7 +53,24 @@ export default class Home extends Component {
         >
           Go To Detail
         </Button>
+        <Counter />
       </>
     );
   }
 }
+
+const mapStateToProps = ({ counter }) => {
+  return {
+    // key => nama props
+    // value => state apa di store yang mau dimasukkan
+    counter, // counter : counter
+  };
+};
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {
+//     handleLogin: () => {
+//       dispatch()
+//     }
+//   }
+// };
+export default connect(mapStateToProps)(Home);

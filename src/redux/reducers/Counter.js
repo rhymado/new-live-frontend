@@ -1,3 +1,4 @@
+import { addCounterString, subCounterString } from "../actionString";
 const initialState = {
   counterNumber: 1,
 };
@@ -7,13 +8,13 @@ const counterReducer = (prevState = initialState, action) => {
   // action => yang dikirim oleh dispatch
   let nextNumber = prevState.counterNumber;
   switch (action.type) {
-    case "ADD_COUNTER":
+    case addCounterString:
       nextNumber += 1;
       return {
         ...prevState,
         counterNumber: nextNumber,
       };
-    case "SUB_COUNTER":
+    case subCounterString:
       nextNumber -= 1;
       return {
         ...prevState,
